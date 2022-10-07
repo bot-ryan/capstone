@@ -6,7 +6,6 @@ import playerRoutes from './routes/player.js';
 import concessionRoutes from './routes/concession.js';
 import gameDataRoutes from './routes/gameData.js';
 
-require('dotenv').config();
 
 const app = express();
 
