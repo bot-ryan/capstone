@@ -9,7 +9,7 @@
   "type": "module",
   "scripts": {
     "start": "nodemon server.js",
-    "build": "cd .. && cd client && npm run build",
+    "build": "cd C:/Users/ryan_/Capstone/2022_05_mi_oil-exploration/client && npm run build",
     "install-client": "cd client && npm install",
     "heroku-postbuild": "npm run build"
   },
