@@ -1,7 +1,5 @@
 import Concession from '../models/concessionModel.js';
 import mongoose from 'mongoose';
-// const Concession = require('../models/concessionModel')
-// const mongoose = require('mongoose')
 
 //Get all concessions
 export const getConcessions = async (req, res) => {
@@ -98,12 +96,3 @@ export const updateConcession = async (req, res) => {
 
     res.status(200).json(concession)
 }
-
-//Exporting the functions
-// module.exports = {
-//     getConcessions,
-//     getConcession,
-//     createConcession,
-//     deleteConcession,
-//     updateConcession
-// }

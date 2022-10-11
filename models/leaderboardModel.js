@@ -1,9 +1,13 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose';
 
 const Schema = mongoose.Schema
 
 //Schema for the collection named 'leaderboards' 
 const LeaderboardSchema = new Schema({
+    gameID: {
+        type: String,
+        required: true
+    },
     name: {
         type: String,
         required: true
@@ -13,9 +17,8 @@ const LeaderboardSchema = new Schema({
         required: true
     },
     rank: {
-        type: Number,
-        required: true
+        type: Number
     }
 })
 
-module.exports = mongoose.model('leaderboard', LeaderboardSchema)
+export default mongoose.model('leaderboard', LeaderboardSchema);

@@ -34,11 +34,11 @@ export const getGame = async (req, res) => {
 //Create new game
 export const createGame = async (req, res) => {
     //Grabbing the properties from the request body
-    const {gamePin, round, players} = req.body
+    const {gamePin, round, maxRounds, players, host} = req.body
 
     // add document to database
     try{
-        const game = await GameData.create({gamePin, round, players})
+        const game = await GameData.create({gamePin, round, maxRounds, players, host})
         res.status(200).json(game)
     } catch (error){
         res.status(400).json({error: error.message})
@@ -84,6 +84,30 @@ export const updateGame = async (req, res) => {
     const game = await GameData.findOneAndUpdate({_id: id}, {
         ...req.body
     })
+
+    if (!game) {
+        return res.status(400).json({error: 'No such game found.'})
+    }
+
+    res.status(200).json(game)
+}
+
+//Add a player to game
+export const updateGamePlayers = async (req, res) => {
+    const {id,playerId} = req.params
+
+    /*
+    * To prevent application crashes
+    * MongoDB ObjectID must be a string of 12 bytes or a string of 24 hex characters
+    */
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({error: 'No such game found. ObjectId error encountered!'})
+    }
+
+    const game = await GameData.findOneAndUpdate({_id: id}, {
+        $push: {players: playerId}
+    },
+    {new: true})
 
     if (!game) {
         return res.status(400).json({error: 'No such game found.'})

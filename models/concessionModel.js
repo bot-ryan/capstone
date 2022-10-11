@@ -20,6 +20,9 @@ const concessionsSchema = new Schema({
     status: {
         type: String,
         required: true
+    },
+    owner: {
+        type: String
     }
 })
 
