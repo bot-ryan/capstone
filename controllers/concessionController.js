@@ -40,11 +40,11 @@ export const getConcession = async (req, res) => {
 */
 export const createConcession = async (req, res) => {
     //Grabbing the properties from the request body
-    const {location, cost, resource, status} = req.body
+    const {location, cost, resource, status, owner} = req.body
 
     // add document to database
     try{
-        const concession = await Concession.create({location, cost, resource, status})
+        const concession = await Concession.create({location, cost, resource, status, owner})
         res.status(200).json(concession)
     } catch (error){
         res.status(400).json({error: error.message})
