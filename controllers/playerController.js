@@ -94,3 +94,27 @@ export const updatePlayer = async (req, res) => {
 
     res.status(200).json(player)
 }
+
+//Add a concession owned
+export const updatePlayerConcessions = async (req, res) => {
+    const {id,concessionID} = req.params
+
+    /*
+    * To prevent application crashes
+    * MongoDB ObjectID must be a string of 12 bytes or a string of 24 hex characters
+    */
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({error: 'No such game found. ObjectId error encountered!'})
+    }
+
+    const game = await GameData.findOneAndUpdate({_id: id}, {
+        $push: {concessions: concessionID}
+    },
+    {new: true})
+
+    if (!game) {
+        return res.status(400).json({error: 'No such game found.'})
+    }
+
+    res.status(200).json(game)
+}

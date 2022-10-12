@@ -17,7 +17,7 @@ const playerSchema = new Schema({
         type: Number,
         required: true
     },
-    concessions: [concessionsSchema],
+    concessions: [String],
     colour: {
         type: String
     },

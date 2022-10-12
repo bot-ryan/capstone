@@ -115,12 +115,3 @@ export const updateGamePlayers = async (req, res) => {
 
     res.status(200).json(game)
 }
- 
-// //Exporting the functions
-// module.exports = {
-//     getGames,
-//     getGame,
-//     createGame,
-//     deleteGame,
-//     updateGame
-// }
