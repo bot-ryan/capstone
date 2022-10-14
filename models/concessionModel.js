@@ -14,12 +14,15 @@ const concessionsSchema = new Schema({
         required: true
     },
     resource: {
-        type: String,
+        type: Number,
         required: true
     },
     status: {
         type: String,
         required: true
+    },
+    owner: {
+        type: String
     }
 })
 

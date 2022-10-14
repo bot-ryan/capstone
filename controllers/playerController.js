@@ -37,11 +37,11 @@ export const getPlayer = async (req, res) => {
 //Create new player
 export const createPlayer = async (req, res) => {
     //Grabbing the properties from the request body
-    const {name, capital, score} = req.body
+    const {name, capital, score, concessions, colour, host, ready} = req.body
 
     // add document to database
     try{
-        const player = await Player.create({name, capital, score})
+        const player = await Player.create({name, capital, score, concessions, colour, host, ready})
         res.status(200).json(player)
     } catch (error){
         res.status(400).json({error: error.message})
@@ -94,12 +94,27 @@ export const updatePlayer = async (req, res) => {
 
     res.status(200).json(player)
 }
- 
-//Exporting the functions
-// module.exports = {
-//     getPlayers,
-//     getPlayer,
-//     createPlayer,
-//     deletePlayer,
-//     updatePlayer
-// }
+
+//Add a concession owned
+export const updatePlayerConcessions = async (req, res) => {
+    const {id,concessionID} = req.params
+
+    /*
+    * To prevent application crashes
+    * MongoDB ObjectID must be a string of 12 bytes or a string of 24 hex characters
+    */
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({error: 'No such player found. ObjectId error encountered!'})
+    }
+
+    const player = await Player.findOneAndUpdate({_id: id}, {
+        $push: {concessions: concessionID}
+    },
+    {new: true})
+
+    if (!player) {
+        return res.status(400).json({error: 'No such player found.'})
+    }
+
+    res.status(200).json(player)
+}

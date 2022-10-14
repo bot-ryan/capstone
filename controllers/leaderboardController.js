@@ -1,15 +1,15 @@
-const Leaderboard = require('../models/leaderboardModel')
-const mongoose = require('mongoose')
+import Leaderboard from '../models/leaderboardModel.js';
+import mongoose from 'mongoose';
 
 //Get all Leaderboard entries
-const getLeaderboards = async (req, res) => {
+export const getLeaderboards = async (req, res) => {
     const leaderboards = await Leaderboard.find({})
 
     res.status(200).json(leaderboards)
 }
 
 //Get a single leaderboard entry
-const getLeaderboard = async (req, res) => {
+export const getLeaderboard = async (req, res) => {
     
     //Grabbing id from the route parameter
     const {id} = req.params
@@ -33,13 +33,13 @@ const getLeaderboard = async (req, res) => {
 
 
 //Create new leaderboard entry
-const createLeaderboard = async (req, res) => {
+export const createLeaderboard = async (req, res) => {
     //Grabbing the properties from the request body
-    const {name, score, rank} = req.body
+    const {name, score, rank, gameID} = req.body
 
     // add document to database
     try{
-        const leaderboard = await Leaderboard.create({name, score, rank})
+        const leaderboard = await Leaderboard.create({gameID, name, score, rank})
         res.status(200).json(leaderboard)
     } catch (error){
         res.status(400).json({error: error.message})
@@ -48,7 +48,7 @@ const createLeaderboard = async (req, res) => {
 
 
 //Delete a leaderboard entry
-const deleteLeaderboard = async (req, res) => {
+export const deleteLeaderboard = async (req, res) => {
     //Grabbing id from the route parameter
     const {id} = req.params
 
@@ -72,7 +72,7 @@ const deleteLeaderboard = async (req, res) => {
 
 
 //Update a leaderboard entry
-const updateLeaderboard = async (req, res) => {
+export const updateLeaderboard = async (req, res) => {
     const {id} = req.params
 
     /*
@@ -92,14 +92,4 @@ const updateLeaderboard = async (req, res) => {
     }
 
     res.status(200).json(leaderboard)
-}
-
-
-//Exporting the functions
-module.exports = {
-    getLeaderboards,
-    getLeaderboard,
-    createLeaderboard,
-    deleteLeaderboard,
-    updateLeaderboard
 }

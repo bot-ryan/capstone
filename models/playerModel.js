@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
-// const mongoose = require('mongoose');
-
+import concessionModel from './concessionModel.js';
+const concessionsSchema = concessionModel.schema;
 const Schema = mongoose.Schema;
 
 //Schema for the collection named 'player'
@@ -16,6 +16,16 @@ const playerSchema = new Schema({
     score: {
         type: Number,
         required: true
+    },
+    concessions: [String],
+    colour: {
+        type: String
+    },
+    host:{
+        type: Boolean
+    },
+    ready:{
+        type: Boolean
     }
     
 })

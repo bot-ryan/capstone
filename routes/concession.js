@@ -7,6 +7,6 @@ router.get('/', getConcessions);
 router.get('/:id', getConcession);
 router.post('/create', createConcession);
 router.delete('/delete', deleteConcession);
-router.put('/:id', updateConcession);
+router.patch('/:id', updateConcession);
 
 export default router;

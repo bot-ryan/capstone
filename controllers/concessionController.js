@@ -1,7 +1,5 @@
 import Concession from '../models/concessionModel.js';
 import mongoose from 'mongoose';
-// const Concession = require('../models/concessionModel')
-// const mongoose = require('mongoose')
 
 //Get all concessions
 export const getConcessions = async (req, res) => {
@@ -40,11 +38,11 @@ export const getConcession = async (req, res) => {
 */
 export const createConcession = async (req, res) => {
     //Grabbing the properties from the request body
-    const {location, cost, resource, status} = req.body
+    const {location, cost, resource, status, owner} = req.body
 
     // add document to database
     try{
-        const concession = await Concession.create({location, cost, resource, status})
+        const concession = await Concession.create({location, cost, resource, status, owner})
         res.status(200).json(concession)
     } catch (error){
         res.status(400).json({error: error.message})
@@ -98,12 +96,3 @@ export const updateConcession = async (req, res) => {
 
     res.status(200).json(concession)
 }
-
-//Exporting the functions
-// module.exports = {
-//     getConcessions,
-//     getConcession,
-//     createConcession,
-//     deleteConcession,
-//     updateConcession
-// }
