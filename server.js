@@ -5,7 +5,7 @@ import cors from "cors";
 import playerRoutes from './routes/player.js';
 import concessionRoutes from './routes/concession.js';
 import gameDataRoutes from './routes/gameData.js';
-
+import leaderboardRoutes from './routes/leaderboard.js';
 
 const app = express();
 
@@ -16,6 +16,7 @@ app.use(cors());
 app.use('/player', playerRoutes);
 app.use('/concession', concessionRoutes);
 app.use('/game', gameDataRoutes);
+app.use('/leaderboard', leaderboardRoutes);
 
 /*
 //Connect to database
